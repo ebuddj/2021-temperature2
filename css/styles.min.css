@@ -1,3 +1,73 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+.app___2khK2 {
+  font-family: Lato;
+}
+.app___2khK2 .chart_container___3Jzlm {
+  font-size: 0;
+  display: block;
+  margin: auto auto;
+  text-align: center;
+}
+.app___2khK2 .chart_container___3Jzlm svg {
+  margin: auto auto;
+  overflow: visible;
+  text-align: center;
+}
+.app___2khK2 .chart_container___3Jzlm svg .yaxis___2Krk0 {
+  display: block;
+}
+.app___2khK2 .chart_container___3Jzlm svg .yaxis___2Krk0 text {
+  fill: #000;
+}
+.app___2khK2 .chart_container___3Jzlm svg .xaxis___MfCnB {
+  display: none;
+}
+.app___2khK2 .title_container___28dn4 {
+  left: 70px;
+  position: absolute;
+  text-transform: uppercase;
+  top: 30px;
+}
+.app___2khK2 .title_container___28dn4 h3 {
+  margin: 0;
+  font-size: 30pt;
+  font-weight: 700;
+}
+.app___2khK2 .info_container___rDdFc {
+  bottom: 30px;
+  text-align: right;
+  font-size: 9pt;
+  position: absolute;
+  right: 40px;
+}
+.app___2khK2 .info_container___rDdFc a {
+  color: #000;
+  text-decoration: none;
+}
+.app___2khK2 .info_container___rDdFc a:hover {
+  text-decoration: underline;
+}
+.app___2khK2 .info_container___rDdFc .hemispehere___2uyG9 {
+  font-size: 10pt;
+  letter-spacing: -0.05em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.app___2khK2 .info_container___rDdFc .year_container___2v5FN {
+  font-size: 38pt;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  line-height: 38pt;
+}
+.app___2khK2 .info_container___rDdFc .temp_container___1qCGC {
+  font-size: 28pt;
+  font-weight: 700;
+  line-height: 28pt;
+}
 /* General styles */
 .clearfix___1yHqr {
   zoom: 1;
