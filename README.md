@@ -2,10 +2,10 @@
 
 **Live demo** https://ebuddj.github.io/2021-temperature2/
 
-## Project title
+## World mean temperature change (EBU)
 
 **Sources**
-* []()
+* [NASA](https://data.giss.nasa.gov/gistemp/)
 
 **EBU links**
 * []()

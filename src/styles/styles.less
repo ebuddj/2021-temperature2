@@ -1,7 +1,75 @@
 //@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500.css');
 
-.app {
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
 
+.app {
+  font-family: Lato;
+  .chart_container {
+    font-size: 0;
+    display: block;
+    margin: auto auto;
+    text-align: center;
+    svg {
+      margin: auto auto;
+      overflow: visible;
+      text-align: center;
+      .yaxis {
+        display: block;
+        text {
+          fill: #000;
+        }
+      }
+      .xaxis {
+        display: none;
+      }
+    }
+  }
+  .title_container {
+    left: 70px;
+    position: absolute;
+    text-transform: uppercase;
+    top: 30px;
+    h3 {
+      margin: 0;
+      font-size: 30pt;
+      font-weight: 700;
+    }
+  }
+  .info_container {
+    bottom: 30px;
+    text-align: right;
+    font-size: 9pt;
+    position: absolute;
+    right: 40px;
+    a {
+      color: #000;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .hemispehere {
+      font-size: 10pt;
+      letter-spacing: -0.05em;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .year_container {
+      font-size: 38pt;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      line-height: 38pt;
+    }
+    .temp_container {
+      font-size: 28pt;
+      font-weight: 700;
+      line-height: 28pt;
+    }
+  }
 }
 
 @import 'basics.less';
