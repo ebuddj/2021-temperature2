@@ -4,6 +4,13 @@
 
 ## World mean temperature change (EBU)
 
+Inspiration: https://twitter.com/ScottDuncanWX/status/1417930383929352199
+
+* Northern hemisphere version: https://ebuddj.github.io/2021-temperature2/#hemisphere=Northern%20hemisphere
+* Southern hemisphere version: https://ebuddj.github.io/2021-temperature2/#hemisphere=Southern%20hemisphere
+* Specific month: https://ebuddj.github.io/2021-temperature2/#month=July
+* Specific month and hemisphere: https://ebuddj.github.io/2021-temperature2/#month=July&hemisphere=Southern%20hemisphere
+
 **Sources**
 * [NASA](https://data.giss.nasa.gov/gistemp/)
 

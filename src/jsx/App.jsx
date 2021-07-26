@@ -38,8 +38,8 @@ const month = getHashValue('month') ? getHashValue('month') : 'Year';
 
 const hemispheres = {
   'World':0,
-  'North hemisphere':1,
-  'South hemisphere':2
+  'Northern hemisphere':1,
+  'Southern hemisphere':2
 };
 const months = {
   'January':'Jan',
