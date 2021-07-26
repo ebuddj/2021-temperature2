@@ -27,15 +27,16 @@ body {
   display: none;
 }
 .app___2khK2 .title_container___28dn4 {
-  left: 70px;
+  left: 60px;
   position: absolute;
   text-transform: uppercase;
   top: 30px;
 }
 .app___2khK2 .title_container___28dn4 h3 {
-  margin: 0;
   font-size: 30pt;
   font-weight: 700;
+  line-height: 30pt;
+  margin: 0;
 }
 .app___2khK2 .info_container___rDdFc {
   bottom: 30px;
