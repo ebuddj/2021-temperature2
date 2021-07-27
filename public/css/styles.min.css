@@ -20,8 +20,17 @@ body {
 .app___2khK2 .chart_container___3Jzlm svg .yaxis___2Krk0 {
   display: block;
 }
+.app___2khK2 .chart_container___3Jzlm svg .yaxis___2Krk0 line {
+  stroke-width: 0.5;
+  stroke: rgba(0, 0, 0, 0.5);
+}
 .app___2khK2 .chart_container___3Jzlm svg .yaxis___2Krk0 text {
   fill: #000;
+  font-size: 12pt;
+}
+.app___2khK2 .chart_container___3Jzlm svg .yaxis___2Krk0 path {
+  stroke-width: 0.5;
+  stroke: rgba(0, 0, 0, 0.5);
 }
 .app___2khK2 .chart_container___3Jzlm svg .xaxis___MfCnB {
   display: none;
