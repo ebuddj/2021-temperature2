@@ -143,8 +143,7 @@ class App extends Component {
       })
       .tickSizeInner(-width)
       .tickSizeOuter(0));
-      
-      
+
     let bars = chart_elements.selectAll('.bar')
       .data(data);
 
@@ -160,9 +159,7 @@ class App extends Component {
       .merge(bars)
       .attr('width', x.bandwidth())
       .attr('height', d => Math.abs(y(d) - y(0)))
-      .attr('y', d => {
-        return y(Math.max(0, d))
-      })
+      .attr('y', d => (d > 0) ? y(Math.max(0, d)) : y(Math.max(0, d)) + 1)
       .attr('x', (d, i) => x(i));
   }
   // shouldComponentUpdate(nextProps, nextState) {}
