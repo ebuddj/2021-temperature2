@@ -15,7 +15,7 @@ Inspiration: https://twitter.com/ScottDuncanWX/status/1417930383929352199
 * [NASA](https://data.giss.nasa.gov/gistemp/)
 
 **EBU links**
-* []()
+* [News Exchange](https://news-exchange.ebu.ch/item_detail/88f02fc9070bf4d7e8eb06adb568715e/2021_10035021)
 
 **Used by**
 * []()
