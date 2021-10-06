@@ -13,6 +13,8 @@ Inspiration: https://twitter.com/ScottDuncanWX/status/1417930383929352199
 
 **Sources**
 * [NASA](https://data.giss.nasa.gov/gistemp/)
+  * When referencing the GISTEMP v4 data provided here, please cite both this webpage and also our most recent scholarly publication about the data. In citing the webpage, be sure to include the date of access. 
+
 
 **EBU links**
 * [News Exchange](https://news-exchange.ebu.ch/item_detail/88f02fc9070bf4d7e8eb06adb568715e/2021_10035021)
