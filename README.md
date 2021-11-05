@@ -20,7 +20,11 @@ Inspiration: https://twitter.com/ScottDuncanWX/status/1417930383929352199
 * [News Exchange](https://news-exchange.ebu.ch/item_detail/88f02fc9070bf4d7e8eb06adb568715e/2021_10035021)
 
 **Used by**
-* []()
+* BNT/Bulgaria on BNT1
+* CT/Czechia on CT24
+* CT/Czechia on CT1 Czech
+* RUV/Iceland on RUV HLS
+* RTS/Serbia on RTS 1 Serbia
 
 ## How to use
 
