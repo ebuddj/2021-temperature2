@@ -2,12 +2,16 @@
 
 #app-root-2021-temperature2 .app {
   font-family: Lato;
+  position: relative;
   .chart_container {
     display: block;
     font-size: 0;
+    height: 650px;
     margin: auto auto;
     text-align: center;
+    width: 100%;
     svg {
+      height: 650px;
       margin: auto auto;
       overflow: visible;
       text-align: center;
@@ -48,7 +52,7 @@
     font-size: 9pt;
     font-weight: 300;
     position: absolute;
-    right: 40px;
+    right: 0px;
     text-align: right;
     a {
       color: #000;
@@ -59,14 +63,14 @@
     }
     .hemispehere {
       font-size: 10pt;
-      letter-spacing: -0.05em;
       font-weight: 700;
+      letter-spacing: -0.05em;
       text-transform: uppercase;
     }
     .year_container {
       font-size: 38pt;
-      letter-spacing: 0.05em;
       font-weight: 700;
+      letter-spacing: 0.05em;
       line-height: 38pt;
     }
     .temp_container {

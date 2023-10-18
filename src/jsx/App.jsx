@@ -1,5 +1,5 @@
 import React, {
-  useState, useEffect, useCallback, useRef
+  useState, useEffect, useCallback, useRef, useMemo
 } from 'react';
 
 // https://d3js.org/
@@ -10,24 +10,6 @@ import chroma from 'chroma-js';
 import '../styles/styles.less';
 // Use chroma to make the color scale.
 // https://gka.github.io/chroma.js/
-const scaleMax = 1;
-const scaleMin = -1;
-const f = chroma.scale('RdYlBu').domain([scaleMax, 0, scaleMin]);
-const f_text = chroma.scale(['red', 'rgba(0, 0, 0, 0.3)', 'blue']).padding(-1).domain([scaleMax, 0, scaleMin]);
-const margin = {
-  top: 40, right: 40, bottom: 40, left: 40
-};
-const width = window.innerWidth - margin.left - margin.right;
-const height = window.innerHeight - margin.top - margin.bottom;
-
-const x = d3.scaleBand()
-  .range([0, width]);
-const y = d3.scaleLinear()
-  .range([0, height]);
-
-let chart_elements;
-let yAxis;
-let xAxis;
 
 const getHashValue = (key) => {
   const matches = window.location.hash.match(new RegExp(`${key}=([^&]*)`));
@@ -62,27 +44,48 @@ let start_year = 1880;
 let end_year = 2021;
 
 function App() {
+  const scaleMax = 1;
+  const scaleMin = -1;
+  const f = chroma.scale('RdYlBu').domain([scaleMax, 0, scaleMin]);
+  const f_text = chroma.scale(['red', 'rgba(0, 0, 0, 0.3)', 'blue']).padding(-1).domain([scaleMax, 0, scaleMin]);
+  const margin = useMemo(() => ({
+    top: 40, right: 0, bottom: 40, left: 40
+  }), []);
+
+  const chart_elements = useRef(null);
+  const yAxis = useRef(null);
+  const xAxis = useRef(null);
+  const appRef = useRef(null);
+  const chartRef = useRef(null);
   const interval = useRef(null);
+  const svg = useRef(null);
+  const x = useRef(null);
+  const y = useRef(null);
+  const width = useRef(null);
+  const height = useRef(null);
+
   const [currentTemp, setCurrentTemp] = useState(0);
   const [curYear, setCurYear] = useState(start_year);
   const [data, setData] = useState(null);
-  const svg = useRef(null);
-  const appRef = useRef(null);
-  const chartRef = useRef(null);
 
   const updateData = useCallback(() => { // https://www.d3-graph-gallery.com/graph/barplot_button_data_hard.html
     const bar_data = data.slice(0, curYear - start_year + 1);
-    x.domain(bar_data.map((el, i) => i));
-    xAxis.call(d3.axisBottom(x));
+    x.current = d3.scaleBand()
+      .range([0, width.current]);
+    y.current = d3.scaleLinear()
+      .range([0, height.current]);
 
-    y.domain([Math.max(0.15, d3.max(bar_data, d => d)), Math.min(-0.3, d3.min(bar_data, d => d))]);
-    yAxis.call(d3.axisLeft(y)
+    x.current.domain(bar_data.map((el, i) => i));
+    xAxis.current.call(d3.axisBottom(x.current));
+
+    y.current.domain([Math.max(0.15, d3.max(bar_data, d => d)), Math.min(-0.3, d3.min(bar_data, d => d))]);
+    yAxis.current.call(d3.axisLeft(y.current)
       .ticks(0.5)
       .tickFormat(i => `${i}°C`)
-      .tickSizeInner(-width)
+      .tickSizeInner(-width.current)
       .tickSizeOuter(0));
 
-    const bars = chart_elements.selectAll('.bar')
+    const bars = chart_elements.current.selectAll('.bar')
       .data(bar_data);
 
     bars.exit().remove();
@@ -93,13 +96,13 @@ function App() {
       .attr('height', 0)
       .attr('width', 0)
       .attr('x', 0)
-      .attr('y', y(0))
+      .attr('y', y.current(0))
       .merge(bars)
-      .attr('width', x.bandwidth())
-      .attr('height', d => Math.abs(y(d) - y(0)))
-      .attr('y', d => ((d > 0) ? y(Math.max(0, d)) : y(Math.max(0, d)) + 1))
-      .attr('x', (d, i) => x(i));
-  }, [curYear, data]);
+      .attr('width', x.current.bandwidth())
+      .attr('height', d => Math.abs(y.current(d) - y.current(0)))
+      .attr('y', d => ((d > 0) ? y.current(Math.max(0, d)) : y.current(Math.max(0, d)) + 1))
+      .attr('x', (d, i) => x.current(i));
+  }, [curYear, data, f]);
 
   const startInterval = useCallback(() => {
     interval.current = setInterval(() => {
@@ -154,21 +157,23 @@ function App() {
   }, [data, curYear, updateData]);
 
   useEffect(() => {
+    width.current = chartRef.current.offsetWidth - margin.left - margin.right;
+    height.current = chartRef.current.offsetHeight - margin.top - margin.bottom;
     svg.current = d3.select(chartRef.current)
       .append('svg')
-      .attr('width', width + margin.left + margin.right)
-      .attr('height', height + margin.top + margin.bottom);
-    yAxis = svg.current.append('g')
+      .attr('width', width.current + margin.left + margin.right)
+      .attr('height', height.current + margin.top + margin.bottom);
+    yAxis.current = svg.current.append('g')
       .attr('class', 'yaxis')
       .attr('transform', `translate(${margin.left - 1}, ${margin.top})`);
-    xAxis = svg.current.append('g')
+    xAxis.current = svg.current.append('g')
       .attr('class', 'xaxis')
-      .attr('transform', `translate(${margin.left},${height - 50})`);
-    chart_elements = svg.current.append('g')
+      .attr('transform', `translate(${margin.left},${height.current - 50})`);
+    chart_elements.current = svg.current.append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
 
     getData();
-  }, [getData]);
+  }, [getData, margin]);
 
   return (
     <div className="app" ref={appRef}>
@@ -196,12 +201,6 @@ function App() {
             Data:
             {' '}
             <a href="https://data.giss.nasa.gov/gistemp/">NASA</a>
-          </div>
-          <div>
-            Author:
-            {' '}
-            <a href="https://twitter.com/teelmo">Teemo Tebest</a>
-            , EBU
           </div>
           <div>Reference period: 1951–1980</div>
         </div>
