@@ -63,7 +63,7 @@ let end_year = 2021;
 
 function App() {
   const interval = useRef(null);
-  const [currentTemp, setCurrentTemp] = useState(false);
+  const [currentTemp, setCurrentTemp] = useState(0);
   const [curYear, setCurYear] = useState(start_year);
   const [data, setData] = useState(null);
 
@@ -119,9 +119,9 @@ function App() {
 
   const getData = useCallback(() => {
     Promise.all([
-      d3.text(`${(window.location.href.includes('localhost:80')) ? './' : 'https://ebuddj.github.io/2021-temperature2/'}data/GLB.Ts+dSST.csv`),
-      d3.text(`${(window.location.href.includes('localhost:80')) ? './' : 'https://ebuddj.github.io/2021-temperature2/'}data/NH.Ts+dSST.csv`),
-      d3.text(`${(window.location.href.includes('localhost:80')) ? './' : 'https://ebuddj.github.io/2021-temperature2/'}data/SH.Ts+dSST.csv`)
+      d3.text(`${(window.location.href.includes('localhost:80')) ? './' : 'https://ebuddj.github.io/2021-temperature2/'}assets/data/GLB.Ts+dSST.csv`),
+      d3.text(`${(window.location.href.includes('localhost:80')) ? './' : 'https://ebuddj.github.io/2021-temperature2/'}assets/data/NH.Ts+dSST.csv`),
+      d3.text(`${(window.location.href.includes('localhost:80')) ? './' : 'https://ebuddj.github.io/2021-temperature2/'}assets/data/SH.Ts+dSST.csv`)
     ]).then((files) => {
       files = files.map(file => d3.csvParse(file.split('\n').slice(1).join('\n')));
 
