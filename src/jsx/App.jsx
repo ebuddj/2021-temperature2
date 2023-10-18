@@ -161,26 +161,32 @@ function App() {
     }
   }, [data, curYear, updateData]);
 
+  const createChart = useCallback(() => {
+    width.current = chartRef.current.offsetWidth - margin.left - margin.right;
+    height.current = chartRef.current.offsetHeight - margin.top - margin.bottom;
+    svg.current = d3.select(chartRef.current)
+      .append('svg')
+      .attr('width', width.current + margin.left + margin.right)
+      .attr('height', height.current + margin.top + margin.bottom);
+    yAxis.current = svg.current.append('g')
+      .attr('class', 'yaxis')
+      .attr('transform', `translate(${margin.left - 1}, ${margin.top})`);
+    xAxis.current = svg.current.append('g')
+      .attr('class', 'xaxis')
+      .attr('transform', `translate(${margin.left},${height.current - 50})`);
+    chart_elements.current = svg.current.append('g')
+      .attr('transform', `translate(${margin.left},${margin.top})`);
+
+    getData();
+  }, [getData, margin]);
+
   useEffect(() => {
     if (isVisible === true) {
-      width.current = chartRef.current.offsetWidth - margin.left - margin.right;
-      height.current = chartRef.current.offsetHeight - margin.top - margin.bottom;
-      svg.current = d3.select(chartRef.current)
-        .append('svg')
-        .attr('width', width.current + margin.left + margin.right)
-        .attr('height', height.current + margin.top + margin.bottom);
-      yAxis.current = svg.current.append('g')
-        .attr('class', 'yaxis')
-        .attr('transform', `translate(${margin.left - 1}, ${margin.top})`);
-      xAxis.current = svg.current.append('g')
-        .attr('class', 'xaxis')
-        .attr('transform', `translate(${margin.left},${height.current - 50})`);
-      chart_elements.current = svg.current.append('g')
-        .attr('transform', `translate(${margin.left},${margin.top})`);
-
-      getData();
+      setTimeout(() => {
+        createChart();
+      }, 300);
     }
-  }, [getData, margin, isVisible]);
+  }, [createChart, isVisible]);
 
   return (
     <div className="app" ref={appRef}>
