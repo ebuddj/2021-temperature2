@@ -66,6 +66,9 @@ function App() {
   const [currentTemp, setCurrentTemp] = useState(0);
   const [curYear, setCurYear] = useState(start_year);
   const [data, setData] = useState(null);
+  const svg = useRef(null);
+  const appRef = useRef(null);
+  const chartRef = useRef(null);
 
   const updateData = useCallback(() => { // https://www.d3-graph-gallery.com/graph/barplot_button_data_hard.html
     const bar_data = data.slice(0, curYear - start_year + 1);
@@ -151,24 +154,24 @@ function App() {
   }, [data, curYear, updateData]);
 
   useEffect(() => {
-    const svg = d3.select('.chart_container')
+    svg.current = d3.select(chartRef.current)
       .append('svg')
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom);
-    yAxis = svg.append('g')
+    yAxis = svg.current.append('g')
       .attr('class', 'yaxis')
       .attr('transform', `translate(${margin.left - 1}, ${margin.top})`);
-    xAxis = svg.append('g')
+    xAxis = svg.current.append('g')
       .attr('class', 'xaxis')
       .attr('transform', `translate(${margin.left},${height - 50})`);
-    chart_elements = svg.append('g')
+    chart_elements = svg.current.append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
 
     getData();
   }, [getData]);
 
   return (
-    <div className="app">
+    <div className="app" ref={appRef}>
       <div className="title_container">
         <h3>
           Temperature anomalies
@@ -180,7 +183,7 @@ function App() {
           {end_year}
         </h3>
       </div>
-      <div className="chart_container" />
+      <div className="chart_container" ref={chartRef} />
       <div className="info_container">
         <div className="hemispehere">{hemisphere}</div>
         <div className="year_container">{curYear}</div>
