@@ -1,13 +1,17 @@
 import React, {
   useState, useEffect, useCallback, useRef, useMemo
 } from 'react';
+import '../styles/styles.less';
+
+// https://www.npmjs.com/package/react-is-visible
+import 'intersection-observer';
+import { useIsVisible } from 'react-is-visible';
 
 // https://d3js.org/
 import * as d3 from 'd3';
 
 // https://vis4.net/chromajs/
 import chroma from 'chroma-js';
-import '../styles/styles.less';
 // Use chroma to make the color scale.
 // https://gka.github.io/chroma.js/
 
@@ -63,6 +67,7 @@ function App() {
   const y = useRef(null);
   const width = useRef(null);
   const height = useRef(null);
+  const isVisible = useIsVisible(chartRef, { once: true });
 
   const [currentTemp, setCurrentTemp] = useState(0);
   const [curYear, setCurYear] = useState(start_year);
@@ -157,23 +162,25 @@ function App() {
   }, [data, curYear, updateData]);
 
   useEffect(() => {
-    width.current = chartRef.current.offsetWidth - margin.left - margin.right;
-    height.current = chartRef.current.offsetHeight - margin.top - margin.bottom;
-    svg.current = d3.select(chartRef.current)
-      .append('svg')
-      .attr('width', width.current + margin.left + margin.right)
-      .attr('height', height.current + margin.top + margin.bottom);
-    yAxis.current = svg.current.append('g')
-      .attr('class', 'yaxis')
-      .attr('transform', `translate(${margin.left - 1}, ${margin.top})`);
-    xAxis.current = svg.current.append('g')
-      .attr('class', 'xaxis')
-      .attr('transform', `translate(${margin.left},${height.current - 50})`);
-    chart_elements.current = svg.current.append('g')
-      .attr('transform', `translate(${margin.left},${margin.top})`);
+    if (isVisible === true) {
+      width.current = chartRef.current.offsetWidth - margin.left - margin.right;
+      height.current = chartRef.current.offsetHeight - margin.top - margin.bottom;
+      svg.current = d3.select(chartRef.current)
+        .append('svg')
+        .attr('width', width.current + margin.left + margin.right)
+        .attr('height', height.current + margin.top + margin.bottom);
+      yAxis.current = svg.current.append('g')
+        .attr('class', 'yaxis')
+        .attr('transform', `translate(${margin.left - 1}, ${margin.top})`);
+      xAxis.current = svg.current.append('g')
+        .attr('class', 'xaxis')
+        .attr('transform', `translate(${margin.left},${height.current - 50})`);
+      chart_elements.current = svg.current.append('g')
+        .attr('transform', `translate(${margin.left},${margin.top})`);
 
-    getData();
-  }, [getData, margin]);
+      getData();
+    }
+  }, [getData, margin, isVisible]);
 
   return (
     <div className="app" ref={appRef}>
